@@ -818,6 +818,7 @@ func (s *Server) Serve(lis net.Listener) error {
 		// Make sure we account for the goroutine so GracefulStop doesn't nil out
 		// s.conns before this conn can be added.
 		s.serveWG.Add(1)
+		fmt.Println("connet:", rawConn.RemoteAddr())
 		go func() {
 			s.handleRawConn(lis.Addr().String(), rawConn)
 			s.serveWG.Done()
